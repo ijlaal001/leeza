@@ -25,11 +25,12 @@
     }
   </style>
   <script type="text/javascript">
+    var flag = 1;
+    var moveCount = 0;
+
     function f1() {
       alert("you are right qt <3");
     }
-
-    var flag = 1;
 
     function f() {
       var Bn = document.getElementById('Bn');
@@ -68,10 +69,14 @@
         Bn.style.left = '360px';
         flag = 1;
       }
+
+      moveCount++;
     }
 
     function f2() {
-      alert('but i do ^_^');
+      if (moveCount >= 10) {
+        alert('but i do ^_^');
+      }
     }
   </script>
 </head>
