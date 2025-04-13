@@ -7,7 +7,7 @@
       position: absolute;
       left: 360px;
       top: 235px;
-      transition: all 0.3s ease; /* Smooth movement */
+      transition: all 0.3s ease;
     }
 
     #By {
@@ -32,52 +32,47 @@
       alert("you are right qt <3");
     }
 
-    function f() {
+    function moveButton() {
       var Bn = document.getElementById('Bn');
       var By = document.getElementById('By');
 
       var yesRect = By.getBoundingClientRect();
-
-      var aWidth = document.body.clientWidth || document.documentElement.clientWidth;
-      var aHeight = document.body.clientHeight || document.documentElement.clientHeight;
+      var aWidth = window.innerWidth;
+      var aHeight = window.innerHeight;
 
       var sJs1, sJs2;
       do {
-        sJs1 = Math.floor(Math.random() * aHeight);
-        sJs2 = Math.floor(Math.random() * aWidth);
+        sJs1 = Math.floor(Math.random() * (aHeight - 50));
+        sJs2 = Math.floor(Math.random() * (aWidth - 100));
       } while (
-        Math.abs(sJs1 - yesRect.top) < 50 && Math.abs(sJs2 - yesRect.left) < 80
+        Math.abs(sJs1 - yesRect.top) < 60 && Math.abs(sJs2 - yesRect.left) < 100
       );
 
-      if (flag == 1) {
-        Bn.style.top = sJs1 + 'px';
-        Bn.style.left = sJs2 + 'px';
-        flag = 2;
-
-      } else if (flag == 2) {
-        Bn.style.top = sJs1 + 'px';
-        Bn.style.left = sJs2 + 'px';
-        flag = 3;
-
-      } else if (flag == 3) {
-        Bn.style.top = '235px';
-        Bn.style.left = '286px';
-        flag = 4;
-
-      } else if (flag == 4) {
-        Bn.style.top = '235px';
-        Bn.style.left = '360px';
-        flag = 1;
-      }
+      Bn.style.top = sJs1 + 'px';
+      Bn.style.left = sJs2 + 'px';
 
       moveCount++;
+    }
+
+    function f() {
+      if (moveCount < 10) {
+        moveButton();
+      }
     }
 
     function f2() {
       if (moveCount >= 10) {
         alert('but i do ^_^');
+      } else {
+        moveButton();
       }
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var btn = document.getElementById("Bn");
+      btn.addEventListener("mouseover", f);
+      btn.addEventListener("touchstart", f, { passive: true }); // mobile support
+    });
   </script>
 </head>
 
@@ -89,7 +84,7 @@
   </div>
 
   <div id="Bn">
-    <input type="button" value=" N o " onmouseover="f()" onclick="f2()">
+    <input type="button" value=" N o " onclick="f2()">
   </div>
 </body>
 </html>
