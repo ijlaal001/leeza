@@ -2,95 +2,107 @@
 <html>
 <head>
   <title>HEY!</title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      font-family: 'Pacifico', cursive;
       text-align: center;
-      background-color: #fce4ec;
-      margin: 0;
-      padding: 0;
+      overflow: hidden;
     }
 
     h1 {
-      margin-top: 40px;
-      color: #880e4f;
+      color: #ff69b4;
+      margin-top: 20px;
+      font-size: 36px;
     }
 
-    #gif {
-      width: 250px;
-      height: auto;
+    img {
+      width: 200px;
       margin-top: 20px;
     }
 
     #buttons {
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
-    #By, #Bn {
-      display: inline-block;
-      margin: 0 15px;
+    input[type="button"] {
+      font-size: 18px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #ffb6c1;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s ease;
     }
 
-    #Bn {
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    footer {
-      position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 14px;
-      color: #555;
+    input[type="button"]:hover {
+      background-color: #ff69b4;
+      color: white;
     }
   </style>
+
   <script>
     var moveCount = 0;
 
-    function f1() {
-      window.location.href = "yes.html";
+    function moveButton() {
+      var Bn = document.getElementById('Bn');
+      var By = document.getElementById('By');
+      var yesRect = By.getBoundingClientRect();
+
+      var aWidth = window.innerWidth;
+      var aHeight = window.innerHeight;
+
+      var newTop, newLeft;
+      do {
+        newTop = Math.floor(Math.random() * (aHeight - 100));
+        newLeft = Math.floor(Math.random() * (aWidth - 100));
+      } while (
+        Math.abs(newTop - yesRect.top) < 60 && Math.abs(newLeft - yesRect.left) < 100
+      );
+
+      Bn.style.position = "absolute";
+      Bn.style.top = newTop + 'px';
+      Bn.style.left = newLeft + 'px';
+      moveCount++;
+    }
+
+    function f() {
+      if (moveCount < 10) {
+        moveButton();
+      }
     }
 
     function f2() {
-      if (moveCount >= 5) {
+      if (moveCount >= 10) {
         window.location.href = "no.html";
       } else {
         moveButton();
       }
     }
 
-    function moveButton() {
-      var Bn = document.getElementById('Bn');
-      var randomTop = Math.floor(Math.random() * 300) - 150;
-      var randomLeft = Math.floor(Math.random() * 300) - 150;
-      Bn.style.transform = `translate(${randomLeft}px, ${randomTop}px)`;
-      moveCount++;
-    }
-
     document.addEventListener("DOMContentLoaded", function () {
       var btn = document.getElementById("Bn");
-      btn.addEventListener("mouseover", moveButton);
-      btn.addEventListener("touchstart", moveButton, { passive: true }); // for mobile
+      btn.addEventListener("mouseover", f);
+      btn.addEventListener("touchstart", f, { passive: true });
     });
   </script>
 </head>
+
 <body>
   <h1>Do you love me?</h1>
-  <img id="gif" src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="cute gif">
+  <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="Cute GIF">
 
   <div id="buttons">
-    <div id="By">
-      <input type="button" value=" Yes " onclick="f1()">
-    </div>
-    <div id="Bn">
-      <input type="button" value=" N o " onclick="f2()">
-    </div>
+    <input type="button" value=" Yes 💕 " onclick="window.location.href='yes.html'" id="By">
+    <input type="button" value=" N o 😈 " onclick="f2()" id="Bn">
   </div>
 
-  <footer>
-    Made with ❤️ by Ijlaal Akhtar
-  </footer>
+  <!-- Optional: Background music -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
 </body>
 </html>
