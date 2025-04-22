@@ -2,38 +2,29 @@
 <html>
 <head>
   <title>HEY!</title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta charset="utf-8">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
   <style>
     body {
       background-color: #fff0f5;
       font-family: 'Pacifico', cursive;
+      text-align: center;
       overflow: hidden;
     }
 
     h1 {
-      position: absolute;
-      left: 50%;
-      top: 140px;
-      transform: translateX(-50%);
-      width: auto;
-      font-size: 36px;
       color: #ff69b4;
+      margin-top: 20px;
+      font-size: 36px;
     }
 
-    #By, #Bn {
-      position: absolute;
-      top: 235px;
+    img {
+      width: 200px;
+      margin-top: 20px;
     }
 
-    #By {
-      left: 285px;
-    }
-
-    #Bn {
-      left: 360px;
-      transition: all 0.3s ease;
+    #buttons {
+      margin-top: 40px;
     }
 
     input[type="button"] {
@@ -43,6 +34,7 @@
       background-color: #ffb6c1;
       border-radius: 10px;
       cursor: pointer;
+      margin: 10px;
       transition: 0.3s ease;
     }
 
@@ -50,57 +42,30 @@
       background-color: #ff69b4;
       color: white;
     }
-
-    img {
-      position: absolute;
-      top: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-    }
   </style>
 
-  <script type="text/javascript">
+  <script>
     var moveCount = 0;
-
-    function f1() {
-      alert("you are right qt <3");
-
-      for (let i = 0; i < 30; i++) {
-        const heart = document.createElement("div");
-        heart.textContent = "💖";
-        heart.style.position = "absolute";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.top = Math.random() * window.innerHeight + "px";
-        heart.style.fontSize = "24px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
-      }
-
-      setTimeout(() => {
-        window.location.href = "https://example.com"; // Change to your own cute page
-      }, 2000);
-    }
 
     function moveButton() {
       var Bn = document.getElementById('Bn');
       var By = document.getElementById('By');
-
       var yesRect = By.getBoundingClientRect();
+
       var aWidth = window.innerWidth;
       var aHeight = window.innerHeight;
 
-      var sJs1, sJs2;
+      var newTop, newLeft;
       do {
-        sJs1 = Math.floor(Math.random() * (aHeight - 50));
-        sJs2 = Math.floor(Math.random() * (aWidth - 100));
+        newTop = Math.floor(Math.random() * (aHeight - 100));
+        newLeft = Math.floor(Math.random() * (aWidth - 100));
       } while (
-        Math.abs(sJs1 - yesRect.top) < 60 && Math.abs(sJs2 - yesRect.left) < 100
+        Math.abs(newTop - yesRect.top) < 60 && Math.abs(newLeft - yesRect.left) < 100
       );
 
-      Bn.style.top = sJs1 + 'px';
-      Bn.style.left = sJs2 + 'px';
-
+      Bn.style.position = "absolute";
+      Bn.style.top = newTop + 'px';
+      Bn.style.left = newLeft + 'px';
       moveCount++;
     }
 
@@ -112,7 +77,7 @@
 
     function f2() {
       if (moveCount >= 10) {
-        alert('but i do ^_^');
+        window.location.href = "no.html";
       } else {
         moveButton();
       }
@@ -127,23 +92,15 @@
 </head>
 
 <body>
-  <!-- Cute GIF -->
+  <h1>Do you love me?</h1>
   <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="Cute GIF">
 
-  <!-- Question -->
-  <h1>Do you love me?</h1>
-
-  <!-- Yes Button -->
-  <div id="By">
-    <input type="button" value=" Yes 💕 " onclick="f1()" title="You better say yes 🥺">
+  <div id="buttons">
+    <input type="button" value=" Yes 💕 " onclick="window.location.href='yes.html'" id="By">
+    <input type="button" value=" N o 😈 " onclick="f2()" id="Bn">
   </div>
 
-  <!-- No Button -->
-  <div id="Bn">
-    <input type="button" value=" N o 😈 " onclick="f2()" title="Try me 😏">
-  </div>
-
-  <!-- Background Music -->
+  <!-- Optional: Background music -->
   <audio autoplay loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
   </audio>
