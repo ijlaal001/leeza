@@ -42,6 +42,16 @@
       background-color: #ff69b4;
       color: white;
     }
+
+    footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #777;
+    }
   </style>
 
   <script>
@@ -70,13 +80,13 @@
     }
 
     function f() {
-      if (moveCount < 5) {
+      if (moveCount < 10) {
         moveButton();
       }
     }
 
     function f2() {
-      if (moveCount >= 5) {
+      if (moveCount >= 10) {
         window.location.href = "no.html";
       } else {
         moveButton();
@@ -104,5 +114,7 @@
   <audio autoplay loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
   </audio>
+
+  <footer>Made with ❤️ by Ijlaal Akhtar</footer>
 </body>
 </html>
