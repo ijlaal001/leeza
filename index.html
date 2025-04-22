@@ -1,35 +1,85 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>HEY!</title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <style>
-    #Bn {
-      position: absolute;
-      left: 360px;
-      top: 235px;
-      transition: all 0.3s ease;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-    #By {
-      position: absolute;
-      left: 285px;
-      top: 235px;
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Pacifico', cursive;
+      overflow: hidden;
     }
 
     h1 {
       position: absolute;
-      left: 220px;
-      top: 175px;
+      left: 50%;
+      top: 140px;
+      transform: translateX(-50%);
       width: auto;
-      height: 210px;
+      font-size: 36px;
+      color: #ff69b4;
+    }
+
+    #By, #Bn {
+      position: absolute;
+      top: 235px;
+    }
+
+    #By {
+      left: 285px;
+    }
+
+    #Bn {
+      left: 360px;
+      transition: all 0.3s ease;
+    }
+
+    input[type="button"] {
+      font-size: 18px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #ffb6c1;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    input[type="button"]:hover {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    img {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
     }
   </style>
+
   <script type="text/javascript">
-    var flag = 1;
     var moveCount = 0;
 
     function f1() {
       alert("you are right qt <3");
+
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.textContent = "💖";
+        heart.style.position = "absolute";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * window.innerHeight + "px";
+        heart.style.fontSize = "24px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1000);
+      }
+
+      setTimeout(() => {
+        window.location.href = "https://example.com"; // Change to your own cute page
+      }, 2000);
     }
 
     function moveButton() {
@@ -71,20 +121,31 @@
     document.addEventListener("DOMContentLoaded", function () {
       var btn = document.getElementById("Bn");
       btn.addEventListener("mouseover", f);
-      btn.addEventListener("touchstart", f, { passive: true }); // mobile support
+      btn.addEventListener("touchstart", f, { passive: true });
     });
   </script>
 </head>
 
 <body>
+  <!-- Cute GIF -->
+  <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="Cute GIF">
+
+  <!-- Question -->
   <h1>Do you love me?</h1>
 
+  <!-- Yes Button -->
   <div id="By">
-    <input type="button" value=" Yes " onclick="f1()">
+    <input type="button" value=" Yes 💕 " onclick="f1()" title="You better say yes 🥺">
   </div>
 
+  <!-- No Button -->
   <div id="Bn">
-    <input type="button" value=" N o " onclick="f2()">
+    <input type="button" value=" N o 😈 " onclick="f2()" title="Try me 😏">
   </div>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
 </body>
 </html>
