@@ -43,6 +43,21 @@
       color: white;
     }
 
+    /* Style for the message box at the top */
+    #messageBox {
+      background-color: #ff69b4;
+      color: white;
+      font-size: 18px;
+      font-family: 'Pacifico', cursive;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      display: none;
+      transition: top 0.3s ease;
+    }
+
     footer {
       position: fixed;
       bottom: 10px;
@@ -52,44 +67,26 @@
       font-size: 14px;
       color: #777;
     }
-
-    #popup {
-      position: absolute;
-      background-color: #ffebf0;
-      color: #d6336c;
-      border: 2px solid #ff69b4;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-size: 16px;
-      font-family: Arial, sans-serif;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 999;
-      display: none;
-      transition: opacity 0.3s ease;
-    }
   </style>
 
   <script>
     var moveCount = 0;
-    var popupShown = 0;
+    var messages = [
+      "Try again, I know you love me!",
+      "Come on, click me... 😘",
+      "You can’t run away that easily!",
+      "Oh, you really don't want to say yes? 😅",
+      "Haha, stop dodging me! 😁"
+    ];
 
-    function showPopup() {
-      if (popupShown >= 5) return;
+    var messageIndex = 0;
 
-      var Bn = document.getElementById('Bn');
-      var popup = document.getElementById('popup');
-      var rect = Bn.getBoundingClientRect();
-
-      popup.style.top = (rect.top - 40) + 'px';
-      popup.style.left = (rect.left + rect.width / 2 - 60) + 'px';
-      popup.innerText = "Try again 😛";
-      popup.style.display = 'block';
-
-      popupShown++;
-
-      setTimeout(function () {
-        popup.style.display = 'none';
-      }, 1000);
+    function showMessage() {
+      var messageBox = document.getElementById("messageBox");
+      messageBox.innerText = messages[messageIndex];
+      messageBox.style.display = "block";
+      messageBox.style.top = "0";
+      messageIndex = (messageIndex + 1) % messages.length; // Loop through the messages
     }
 
     function moveButton() {
@@ -112,12 +109,16 @@
       Bn.style.top = newTop + 'px';
       Bn.style.left = newLeft + 'px';
       moveCount++;
+
+      // Show the message immediately when the button moves
+      showMessage();
     }
 
     function f() {
       if (moveCount < 5) {
-        showPopup();
         moveButton();
+      } else {
+        showMessage();
       }
     }
 
@@ -125,7 +126,6 @@
       if (moveCount >= 5) {
         window.location.href = "no.html";
       } else {
-        showPopup();
         moveButton();
       }
     }
@@ -140,15 +140,15 @@
 
 <body>
   <h1>Do you love me?</h1>
-  <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="Cute animated bear hugging a heart">
+  <img src="https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif" alt="Cute GIF">
+
+  <!-- Message box for showing messages -->
+  <div id="messageBox"></div>
 
   <div id="buttons">
     <input type="button" value=" Yes 💕 " onclick="window.location.href='yes.html'" id="By">
     <input type="button" value=" N o 😈 " onclick="f2()" id="Bn">
   </div>
-
-  <!-- Popup -->
-  <div id="popup"></div>
 
   <!-- Optional: Background music -->
   <audio autoplay loop>
